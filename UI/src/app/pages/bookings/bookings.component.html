@@ -1,0 +1,122 @@
+<div class="container-fluid m-4">
+  <form [formGroup]="bookingDetails" (ngSubmit)="onSubmit()">
+<!-- =============================================================================================== -->
+    <h4>Booking Details</h4>
+    <div class="row">
+      <div class="form-floating mb-3 col-sm-6">
+        <input formControlName="bookedOn" type="date" class="form-control" id="bookedDate" readonly>
+        <label for="bookedDate" class="form-label">Booked On:</label>
+      </div>
+      <div class="form-floating mb-3 col-sm-6">
+        <input formControlName="user" type="text" class="form-control" id="bookedBy" readonly>
+        <label for="bookedBy" class="form-label">User:</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-floating mb-3 col-sm-6">
+        <input formControlName="bookingFrom" type="date" class="form-control" id="bookingFromDate">
+        <label for="bookingFromDate" class="form-label">Booked From:</label>
+      </div>
+      <div class="form-floating mb-3 col-sm-6">
+        <input formControlName="bookingTo" type="date" class="form-control" id="bookingToDate">
+        <label for="bookingToDate" class="form-label">Booked To:</label>
+      </div>
+    </div>
+    <hr>
+<!-- ==================================================================================== -->
+    <h4>Room Details</h4>
+    <div formGroupName="room">
+      <div class="row">
+        <div class="form-floating mb-3 col-sm-6 gap-3">
+          <input formControlName="type" type="text" class="form-control" id="roomType" readonly>
+          <label for="roomType" class="form-label">Room Type:</label>
+        </div>
+        <div class="form-floating mb-3 col-sm-6">
+          <input formControlName="number" type="text" class="form-control" id="roomNo" readonly>
+          <label for="roomNo" class="form-label">Room Number:</label>
+        </div>
+      </div>
+      <div class="row mb-3 gap-3">
+        <div class="form-floating col-sm-6">
+          <input formControlName="capacity" type="number" class="form-control" id="roomCapacity" readonly>
+          <label for="roomCapacity" class="form-label">Capacity:</label>
+        </div>
+        <!-- <div class="form-floating mb-3 col-sm-6">
+            <input formControlName="tariff" type="number" class="form-control" id="tariff" readonly>
+            <label for=" formControlName="tariff" type="number" class="form-control"" class="form-label">Tariff:</label>
+        </div> -->
+        <div class="input-group col-md">
+          <span class="input-group-text" id="tariff">&#8377;</span>
+          <input formControlName="tariff" type="number" class="form-control" aria-label="Room tariff" aria-describedby="tariff">
+        </div>
+      </div>
+      <div class="row gap-3">
+        <div class="form-floating mb-3 col-sm-6">
+          <input formControlName="extension" type="text" class="form-control" id="extension" readonly>
+          <label for="extension" class="form-label">Extension:</label>
+        </div>
+        <div class="form-check col-sm-6 p-4 align-items-center">
+          <input formControlName="ac" type="checkbox" class="form-check-input" id="ac">
+          <label for="ac" class="form-check-label">AC Available:</label>
+        </div>
+      </div>
+    </div>
+    <hr>
+<!-- ===================================================================================================== -->
+    <h4>Customer Details</h4>
+    <div formGroupName="customer">
+      <!-- <div class="form-floating mb-3 col-sm-6">
+        <input formControlName="name" type="text" class="form-control" id="custName">
+        <label for="custName" class="form-label">Name:</label>
+      </div> -->
+
+      <div class="input-group mb-3 col-md">
+        <span class="input-group-text" id="custName">Name</span>
+        <input type="text" formControlName="name" class="form-control" aria-label="customer Name" aria-describedby="custName">
+      </div>
+
+      <div class="row mb-3 g-3">
+        <div  class="col-md input-group">
+          <span class="input-group-text" id="addon-wrapping">&#64;</span>
+          <input formControlName="email" type="email" class="form-control" id="email">
+        </div>
+  
+        <div  class="form-floating col-md">
+          <input formControlName="aadharNo" type="text" class="form-control" id="custAadhar">
+          <label for="custAadhar" class="form-label">Aadhar No:</label>
+        </div>
+  
+        <div  class="form-floating col-md">
+          <input formControlName="contact" type="text" class="form-control" id="custContact">
+          <label for="custContact" class="form-label">Contact:</label>
+        </div>
+   
+      </div>
+      <div class="row mb-3">
+        <div class="form-floating col-sm-6 gap-3">
+          <input formControlName="address" type="text" class="form-control" id="custAddr">
+          <label for="custAddr" class="form-label">Address:</label>
+        </div>  
+        <div class="form-floating col-sm-6">
+          <input formControlName="city" type="text" class="form-control" id="custCity">
+          <label for="custCity" class="form-label">City:</label>
+        </div>
+      </div>
+    </div>
+
+    <h3>Guest Details</h3>
+    <div formArrayName="guest">
+      <div *ngFor="let guest of guest.controls; let i = index" [formGroupName]="i" class="row mb-3 gap-3">
+        <div class="input-group">
+          <span class="input-group-text" id="guestName">Name</span>
+          <input type="text" formControlName="name" class="form-control" aria-label="Guest Name" aria-describedby="guestName">
+          
+          <span class="input-group-text" id="gAadhar">Aadhar</span>
+          <input type="text" formControlName="aadharNo" class="form-control" aria-label="Guest AAdhar" aria-describedby="gAadhar">
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="bookingDetails.invalid">Submit</button>
+  </form>
+</div>

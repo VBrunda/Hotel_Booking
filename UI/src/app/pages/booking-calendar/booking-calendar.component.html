@@ -1,0 +1,40 @@
+<div class="m-4">
+  <div class="d-flex align-items-center gap-4">
+    <button class="btn btn-outline-secondary" (click)="changeMonth(-1)">
+      <i class="bi bi-arrow-left"></i>
+    </button>
+    <h5>{{ monthNames[currentDate.getMonth()] }} {{ currentDate.getFullYear() }}</h5>
+    <button class="btn btn-outline-secondary" (click)="changeMonth(1)">
+      <i class="bi bi-arrow-right"></i>
+    </button>
+  </div>
+    
+    <div class="row mt-3">
+      <div class="col-12">
+        <table class="table table-bordered text-center">
+         <thead>
+           <tr>
+             <th class="days">Rooms</th>
+             <th *ngFor="let day of daysInMonth" class="days">
+              {{day}}</th>
+           </tr>
+         </thead>
+         <tbody>
+          <tr *ngFor="let room of allRooms" class="days">
+            <td> {{room.roomId}}</td>
+            <td *ngFor="let day of daysInMonth; let i= index" class="days" (click)="selectBooking(room, day)"> 
+              <ng-container *ngIf="!checkBooking(day, room.roomId); else available">
+                <i class="bi bi-star text-success" aria-hidden="true"></i> 
+              </ng-container>
+              <ng-template #available>
+                <i class="bi bi-lock-fill text-danger" aria-hidden="true" title="{{checkBooking(day, room.roomId).bookingId}}"></i> 
+              </ng-template>
+            </td>
+          </tr>
+         </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+

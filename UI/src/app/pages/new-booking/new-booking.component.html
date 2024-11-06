@@ -1,0 +1,202 @@
+<div class="container-fluid">
+    <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+        <div class="row justify-content-evenly flex-wrap">
+            <div class="col-7 p-4 align-items-center">
+                <div class="card">
+                    <div class="card-header fw-bold">Room Deails</div>
+                    <!-- Select Room Start -->
+                    <div class="row card-body align-items-end">
+                        <div class="col-6 form-group">
+                            <label for="roomName" class="col-6 form-label fw-bold">Room Type: </label>
+                            <select name="room" id="roomName" class="form-control" formControlName="selectedRoomName"
+                                (change)="updateRoomNumbers()">
+                                <option [value]="" selected>Select Value</option>
+                                <option *ngFor="let room of roomNames" [value]="room">{{room}}</option>
+                            </select>
+                        </div>
+                        <div class="col-6 form-group">
+                            <label for="roomId" class="col-6 form-label fw-bold">Room Number: </label>
+                            <select name="roomNo" id="roomId" class="form-control" formControlName="roomId">
+                                <option [value]="" selected>Select Value</option>
+                                <option *ngFor="let roomNo of roomNumber" [value]="roomNo">{{roomNo}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Select Room End -->
+                <hr>
+                <!-- Booking Details Start -->
+                <div class="card">
+                    <div class="card-header fw-bold">Booking Details</div>
+                    <div class="card-body">
+                        <div class="row my-4">
+                            <div class="col-6">
+                                <label for="bookingFromDate" class="form-label fw-bold">Booking From: </label>
+                                <input id="bookingFromDate" type="date" class="form-control" name="custBookingFromDate"
+                                    formControlName="bookingFromDate">
+                                <div class="text-danger"
+                                    *ngIf="bookingForm.get('bookingFromDate')?.invalid && bookingForm.get('bookingFromDate')?.dirty">
+                                    <small *ngIf="bookingForm.get('bookingFromDate')?.errors?.['required']">Booking From
+                                        is Required</small>
+                                </div>
+                                <div class="text-danger"
+                                    *ngIf="bookingForm.get('bookingFromDate')?.dirty && bookingForm.errors?.['datesInPast']">
+                                    <small>Dates should be from future</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label for="bookingToDate" class="form-label fw-bold">Booking To: </label>
+                                <input id="bookingToDate" type="date" class="form-control" name="custBookingToDate"
+                                    formControlName="bookingToDate">
+                                <div class="text-danger"
+                                    *ngIf="bookingForm.get('bookingToDate')?.invalid && bookingForm.get('bookingToDate')?.dirty">
+                                    <small *ngIf="bookingForm.get('bookingToDate')?.errors?.['required']">Booking To is
+                                        Required</small>
+                                </div>
+                                <div class="text-danger"
+                                    *ngIf=" bookingForm.get('bookingToDate')?.dirty && bookingForm.errors?.['invalidDateRange']">
+                                    <small>Booking To Date must be greater than Booking From Date.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row my-4">
+                            <label for="narration" class="col-4 form-label fw-bold">Comments: </label>
+                            <textarea id="narration" class="col-8 form-control" name="custNarration"
+                                formControlName="narration" style="height:100px; width:400px;"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <!-- Booking Details Ends -->
+                <hr>
+                <!-- Customer Details Starts -->
+                <div class="card">
+                    <div class="card-header fw-bold">Customer Details:</div>
+                    <div class="card-body">
+                        <div class="row my-4">
+                            <label for="name" class="col-auto form-label fw-bold">Customer Name: </label>
+                            <input id="name" class="col-auto form-control" type="text" name="custName"
+                                formControlName="name" style="width: 50%;">
+                            <div class="col-auto text-danger"
+                                *ngIf="bookingForm.get('name')?.invalid && bookingForm.get('name')?.dirty">
+                                <small *ngIf="bookingForm.get('name')?.errors?.['required']">Customer Name is
+                                    Required</small>
+                                <small *ngIf="bookingForm.get('name')?.errors?.['minlength']">Min. length is 3</small>
+                            </div>
+                        </div>
+                        <div class="row my-4">
+                            <label for="mobileNo" class="col-auto form-label fw-bold">Mobile No.: </label>
+                            <input id="mobileNo" class="col-auto form-control" type="text" name="custMobileNo"
+                                formControlName="mobileNo" style="width: 50%;">
+                            <div class="col-auto text-danger"
+                                *ngIf="bookingForm.get('mobileNo')?.invalid && bookingForm.get('mobileNo')?.dirty">
+                                <small *ngIf="bookingForm.get('mobileNo')?.errors?.['required']">Contact No. is
+                                    Required</small>
+                                <small *ngIf="bookingForm.get('mobileNo')?.errors?.['pattern']">Invalid Mobile
+                                    No.</small>
+                            </div>
+                        </div>
+                        <div class="row my-4">
+                            <label for="email" class="col-auto form-label fw-bold">Email: </label>
+                            <input id="email" class="col-auto form-control" type="email" name="custEmail"
+                                formControlName="email" style="width: 50%;">
+                            <div class="col-auto text-danger"
+                                *ngIf="bookingForm.get('email')?.invalid && bookingForm.get('email')?.dirty">
+                                <small *ngIf="bookingForm.get('email')?.errors?.['required']">Email is Required</small>
+                                <small *ngIf="bookingForm.get('email')?.errors?.['email']">Invalid Email</small>
+                            </div>
+                        </div>
+                        <div class="row my-4">
+                            <label for="aadhar" class="col-auto form-label fw-bold">Aadhar No.: </label>
+                            <input id="aadhar" class="col-auto form-control" type="text" name="custAadhar"
+                                formControlName="aadharNo" style="width: 50%;">
+                            <div class="col-auto text-danger"
+                                *ngIf="bookingForm.get('aadharNo')?.invalid && bookingForm.get('aadharNo')?.dirty">
+                                <small *ngIf="bookingForm.get('aadharNo')?.errors?.['required']">Aadhar No. is
+                                    Required</small>
+                                <small *ngIf="bookingForm.get('aadharNo')?.errors?.['pattern']">Invalid Aadhar
+                                    No.</small>
+                            </div>
+                        </div>
+                        <div class="row my-4">
+                            <div class="col-6">
+                                <label for="city" class="form-label fw-bold">City: </label>
+                                <input id="city" class="form-control" type="text" name="custCity"
+                                    formControlName="city">
+                                <div class="text-danger"
+                                    *ngIf="bookingForm.get('city')?.invalid && bookingForm.get('city')?.dirty">
+                                    <small *ngIf="bookingForm.get('city')?.errors?.['required']">City is
+                                        Required</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <label for="address" class="form-label fw-bold">Address: </label>
+                                <textarea id="address" class="form-control" name="custAddress" formControlName="address"
+                                    style="height:100px"></textarea>
+                                <div class="text-danger"
+                                    *ngIf="bookingForm.get('address')?.invalid && bookingForm.get('address')?.dirty">
+                                    <small *ngIf="bookingForm.get('address')?.errors?.['required']">Address is
+                                        Required</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- End of Customer Details -->
+
+            </div>
+            <div class="col-4 p-4 align-items-center">
+                <div class="row">
+                    <div class="col-6">
+                        <h4>Guest Details</h4>
+                    </div>
+                    <div class="col-6 text-end">
+                        <button class="btn btn-outline-primary btn-sm text-end" (click)="addGuest()">Add New</button>
+                    </div>
+                </div>
+
+                <div class="row pt-2">
+                    <div class="col-12">
+                      <table class="table table-bordered rounded">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Aadhar No.</th>
+                            <th>Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody formArrayName="guestDetails">
+                          <tr *ngFor="let guest of guestDetails.controls; let i = index" [formGroupName]="i">
+                            <td>
+                              <input class="form-control" type="text" formControlName="name">
+                              <div class="col-auto text-danger" *ngIf="guest.get('name')?.invalid && guest.get('name')?.dirty">
+                                <small *ngIf="guest.get('name')?.errors?.['required']">Name is required</small>
+                                <small *ngIf="guest.get('name')?.errors?.['minlength']">Min. length is 3</small>
+                              </div>
+                            </td>
+                            <td>
+                              <input class="form-control" type="text" formControlName="aadharNo">
+                              <div class="col-auto text-danger" *ngIf="guest.get('aadharNo')?.invalid && guest.get('aadharNo')?.dirty">
+                                <small *ngIf="guest.get('aadharNo')?.errors?.['required']">Aadhar No. is required</small>
+                                <small *ngIf="guest.get('aadharNo')?.errors?.['pattern']">Invalid Aadhar No.</small>
+                              </div>
+                            </td>
+                            <td>
+                                <i class="bi bi-x-square-fill text-danger" (click)="removeGuestDetail(i)"></i>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>               
+
+            </div>
+        </div>
+        <div class="d-flex gap-4 justify-content-center">
+            <button type="submit" class="btn btn-outline-success" [disabled]="bookingForm.invalid">Submit</button>
+            <button class="btn btn-outline-danger" (click)="resetForm()">Cancel</button>
+        </div>
+    </form>
+</div>

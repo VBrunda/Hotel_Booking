@@ -1,0 +1,26 @@
+<div class="parent">
+    <div class="container">
+        <div class="row">
+          <!-- Left Blank Side -->
+          <div class="col-lg-6"></div>
+      
+          <!-- Right Side Form -->
+          <div class="col-lg-6 d-flex align-items-center justify-content-center right-side">
+            <div class="form-2-wrapper">
+              <h2 class="text-center text-white mb-4">Sign Into Your Account</h2>
+              <form action="#">
+                <div class="mb-3 form-box">
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Enter Your User Name" [(ngModel)]="loginObj.email" required>
+                </div>
+                <div class="mb-3">
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Enter Your Password" [(ngModel)]="loginObj.password" required>
+                </div>
+                <button type="button" class="btn btn-outline-secondary login-btn w-100 mb-3" (click)="onLogin()">Login</button>
+                
+              </form>
+      </div>
+          </div>
+        </div>
+      </div>
+</div>
+

@@ -1,0 +1,55 @@
+<div class="row m-4">
+    <div class="col-12 text-end">
+        <button type="button" class="btn btn-outline-info mx-2" (click)="newCustomer()">Add New Customer</button>
+        <!-- <button type="button" class="btn btn-outline-success mx-2">Update Customer</button> -->
+    </div>
+</div>
+
+<div *ngIf="message" class="alert alert-warning alert-dismissible fade show m-4" role="alert">
+    {{message}}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<div class="row m-4">
+    <div class="col-12">
+        <table class="table table-bordered table-striped text-center">
+            <thead>
+                <tr>
+                    <th *ngFor="let cols of tableHeader">{{cols}}</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr *ngFor="let cust of customersList; let sr = index">
+                    <ng-container *ngIf="!cust.isEdit; else editCust">
+                        <td>{{sr+1}}</td>
+                        <td>{{cust.name}}</td>
+                        <td>{{cust.mobileNo}}</td>
+                        <td>{{cust.email}}</td>
+                        <td>{{cust.aadharNo}}</td>
+                        <td>{{cust.address}}</td>
+                        <td>{{cust.city}}</td>
+                        <td>
+                            <i class="bi bi-pen px-1 text-primary" aria-hidden="true" (click)="onEdit(cust)"></i>
+                            <i class="bi bi-trash-fill text-danger" aria-hidden="true" (click)="onDelete(cust.custId)"></i>
+                        </td>
+                    </ng-container>
+                    <ng-template #editCust>
+                        <td>{{sr+1}}</td>
+                        <td><input type="text" [(ngModel)]="cust.name"  name="custName{{sr}}" class="form-control"></td>
+                        <td><input type="text" [(ngModel)]="cust.mobileNo"  name="custMobile{{sr}}" class="form-control"></td>
+                        <td><input type="text" [(ngModel)]="cust.email"  name="custEmail{{sr}}" class="form-control"></td>
+                        <td><input type="text" [(ngModel)]="cust.aadharNo"  name="custAadhar{{sr}}" class="form-control"></td>
+                        <td><input type="text" [(ngModel)]="cust.address"  name="custAddress{{sr}}" class="form-control"></td>
+                        <td><input type="text" [(ngModel)]="cust.city"  name="custCity{{sr}}" class="form-control"></td>
+                        <td>
+                            <i class="bi bi-save-fill text-success px-1" aria-hidden="true" (click)="updateCustomer(cust)"></i>
+                            <i class="bi bi-x-square-fill text-danger" aria-hidden="true" (click)="onCancelUpdate(cust)"></i>
+                        </td>
+
+                    </ng-template>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

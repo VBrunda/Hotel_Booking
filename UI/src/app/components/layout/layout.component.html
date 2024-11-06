@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-underline">
+  <div class="container-fluid gap-4">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand fs-2 fw-bold text-white" routerLink="/home">Hotel Booking</a>
+    <div class="offcanvas offcanvas-start bg-dark" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h3 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Hotel Booking</h3>
+        <button type="button" class="btn btn-secondary btn-close" data-bs-dismiss="offcanvas"
+          aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body gap-2 justify-content-between">
+        <ul
+          class="navbar-nav my-2 navbar-nav-scroll fs-4  py-2 gap-4 justify-content-evenly text-align-center align-items-start">
+          <li class="nav-item dropdown py-2">
+            <span class="dropdown-toggle" id="navbarScrollingDropdown" data-bs-toggle="dropdown"
+              aria-expanded="false">Booking</span>
+            <ul class="dropdown-menu dropdown-menu-start dropdown-menu-dark" aria-labelledby="navbarScrollingDropdown">
+              <li><a class="dropdown-item" routerLink="/newBooking">New Booking</a></li>
+              <li><a class="dropdown-item" routerLink="/calendar">Booking Calendar</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" routerLink="/rooms">Rooms</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" routerLink="/customers">Customers</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <a class="nav-link dropdown-toggle fs-4" id="navbarUserDropdown" role="button" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        <i class="bi bi-person-circle"></i>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-start dropdown-menu-dark" aria-labelledby="navbarUserDropdown">
+        <li><a class="dropdown-item fw-bold" href="#">{{loggedUserDetails}}</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" routerLink="/">
+            <button type="button" class="btn" (click)="onLogout()">
+              <i class="bi bi-power"></i>
+              Logout
+            </button>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
